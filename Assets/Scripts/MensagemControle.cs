@@ -17,9 +17,9 @@ public class MensagemControle : MonoBehaviour {
 		gameOver = false;
 		restart = false;
 		venceu = false;
-		gameOverTxt.text = "";
-		restartTxt.text = "";
-		venceuTxt.text = "";
+		gameOverTxt.text = "teste";
+		restartTxt.text = "teste";
+		venceuTxt.text = "teste";
 	}
 	
 	void Update () {

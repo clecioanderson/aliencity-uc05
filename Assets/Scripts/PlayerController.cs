@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
@@ -15,6 +14,7 @@ public class PlayerController : MonoBehaviour {
 	public float Velocidade;
 	public float ForcaPulo = 1000f;
 	[HideInInspector] public bool viradoDireita = true;
+	[HideInInspector] public bool jump;
 
 	public Image vida;
 	private MensagemControle MC;
@@ -31,7 +31,12 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
 		//Implementar Pulo Aqui! 
+		tocaChao = Physics2D.Linecast(transform.position, posPe.position, 1 << LayerMask.NameToLayer("chao"));
+		if (Input.GetKeyDown("space") && tocaChao){
+			jump = true;
+		}
 	}
 
 	void FixedUpdate()
@@ -47,6 +52,12 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		//Programar o pulo Aqui! 
+		if (jump){
+			anim.SetTrigger("pula");
+			rb2d.AddForce(new Vector2(0f, ForcaPulo));
+			jump = false;
+		}
+		
 
 		if (translationX > 0 && !viradoDireita) {
 			Flip ();
